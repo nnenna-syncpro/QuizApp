@@ -7,6 +7,9 @@ const questionNumberEl = document.querySelector(".question-number");
 const categoryEl = document.querySelector(".category");
 
 let quizQuestions = [];
+let score = document.querySelector(".score");
+let point = 0;
+let correctAnswer = "";
 
 const getQuestions = async (triviaUrl) => {
   try {
@@ -37,7 +40,7 @@ async function displayQuestion() {
     //display question category
     categoryEl.innerHTML = question.category;
 
-    let correctAnswer = question.correct_answer;
+    correctAnswer = question.correct_answer;
     console.log(correctAnswer);
     let incorrectAnswers = question.incorrect_answers;
     let options = [...incorrectAnswers];
@@ -52,5 +55,33 @@ async function displayQuestion() {
     optionsEl.innerHTML = options
       .map((option, index) => `<button class="option">${option}</button>`)
       .join("");
+  });
+
+  selectOption();
+}
+
+function selectOption() {
+  optionsEl.querySelectorAll("button").forEach((option) => {
+    option.addEventListener("click", () => {
+      //remove selected from previously selected class before adding new selection
+      if (optionsEl.querySelector(".selected")) {
+        optionsEl.querySelector(".selected").classList.remove("selected");
+      }
+      //add selected class to the option that was clicked
+      option.classList.add("selected");
+
+      //get value of the answer option selected
+      let selectedOption = optionsEl.querySelector(".selected").textContent;
+      console.log(selectedOption);
+
+      //indicate right or wrong answer
+      if (selectedOption === correctAnswer) {
+        option.classList.add("correct");
+        point++;
+        score.innerHTML = point;
+      } else {
+        option.classList.add("wrong");
+      }
+    });
   });
 }
