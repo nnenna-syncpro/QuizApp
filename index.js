@@ -63,7 +63,7 @@ async function displayQuestion() {
 function selectOption() {
   optionsEl.querySelectorAll("button").forEach((option) => {
     option.addEventListener("click", () => {
-      //remove selected from previously selected class before adding new selection
+      //remove previously selected class before adding new selected class
       if (optionsEl.querySelector(".selected")) {
         optionsEl.querySelector(".selected").classList.remove("selected");
       }
@@ -72,7 +72,6 @@ function selectOption() {
 
       //get value of the answer option selected
       let selectedOption = optionsEl.querySelector(".selected").textContent;
-      console.log(selectedOption);
 
       //indicate right or wrong answer
       if (selectedOption === correctAnswer) {
@@ -82,6 +81,15 @@ function selectOption() {
       } else {
         option.classList.add("wrong");
       }
+
+      //show right answer if wrong answer is selected
+      Array.from(optionsEl.querySelectorAll("button")).forEach((button) => {
+        if (button.textContent === correctAnswer) {
+          button.classList.add("correct");
+        }
+        //disbale buttons to prevent selecting more than one option
+        button.disabled = true;
+      });
     });
   });
 }
