@@ -9,30 +9,39 @@
   </head>
   <body>
     <div class="container">
-      <div class="header-container">
-        <span class="header">Quizzller Game</span>
-        <span class="score">0</span>
-      </div>
-      <div class="quiz-details">
-        <span class="category"></span>
-        <div class="question-count">
-          <span class="question-number"></span>
-          <span class="total-questions"></span>
+      <div class="quiz-container">
+        <div class="header-container">
+          <span class="header">Quizzller Game</span>
+          <span class="score">0</span>
+        </div>
+        <div class="quiz-details">
+          <span class="category"></span>
+          <div class="question-count">
+            <span class="question-number"></span>
+            <span class="total-questions"></span>
+          </div>
+        </div>
+        <div class="question-conatiner">
+          <div class="question">1. What is Vanilla JavaScript?</div>
+          <div class="options-container">
+            <button class="option">A</button>
+            <button class="option">B</button>
+            <button class="option">C</button>
+            <button class="option">D</button>
+          </div>
+          <div class="btn-controls">
+            <button class="btn prev-btn hide">Previous</button>
+            <button class="btn next-btn">Next</button>
+            <button class="btn submit-btn hide">Submit</button>
+          </div>
         </div>
       </div>
-      <div class="question-conatiner">
-        <div class="question">1. What is Vanilla JavaScript?</div>
-        <div class="options-container">
-          <button class="option">A</button>
-          <button class="option">B</button>
-          <button class="option">C</button>
-          <button class="option">D</button>
+      <div class="end-game-container hide">
+        <div class="header-container">
+          <span class="header">Congratulations!</span>
         </div>
-        <div class="btn-controls">
-          <button class="btn prev-btn hide">Previous</button>
-          <button class="btn next-btn">Next</button>
-          <button class="btn submit-btn hide">Submit</button>
-        </div>
+        <p class="display-score">You scored 3 out of 3</p>
+        <button class="btn play-again-btn">Play Again</button>
       </div>
     </div>
   </body>

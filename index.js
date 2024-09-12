@@ -1,4 +1,4 @@
-const API_URL = `https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple`;
+const API_URL = `https://opentdb.com/api.php?amount=2&category=18&difficulty=easy&type=multiple`;
 
 const questionEl = document.querySelector(".question");
 const optionsEl = document.querySelector(".options-container");
@@ -15,6 +15,9 @@ const nextButtonEl = document.querySelector(".next-btn");
 let questionCount = 0;
 
 const submitButtonEl = document.querySelector(".submit-btn");
+const endGameEl = document.querySelector(".end-game-container");
+const displayScoreEl = document.querySelector(".display-score");
+const quizContainerEl = document.querySelector(".quiz-container");
 
 const getQuestions = async (triviaUrl) => {
   try {
@@ -109,3 +112,13 @@ function handleNextButton() {
 }
 
 nextButtonEl.addEventListener("click", handleNextButton);
+
+function handleSubmitButton() {
+  quizContainerEl.classList.add("hide");
+  endGameEl.classList.remove("hide");
+  displayScoreEl.innerHTML = `
+     <p class="display-score">You scored ${score.textContent} out of ${totalQuestionsEl.textContent}.</p>
+      `;
+}
+
+submitButtonEl.addEventListener("click", handleSubmitButton);
