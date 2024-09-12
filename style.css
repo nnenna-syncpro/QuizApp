@@ -121,6 +121,10 @@ body {
   display: none;
 }
 
+.show {
+  display: block;
+}
+
 @media only screen and (max-width: 519px) {
   .header-container {
     font-size: x-large;
