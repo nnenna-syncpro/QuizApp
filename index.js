@@ -27,7 +27,10 @@ const selectNumberEl = document.querySelector(".number-of-questions");
 const selectCategoryEl = document.querySelector(".select-category");
 const selectDifficultyEl = document.querySelector(".difficulty-level");
 
-const errorEl = document.querySelector(".error");
+const numberErrorEl = document.querySelector(".error-number");
+const optionErrorEl = document.querySelector(".error-option");
+
+let selectedOption;
 
 const startQuiz = () => {
   let errorMessages = [];
@@ -41,7 +44,7 @@ const startQuiz = () => {
     console.log("A number between 1 and 50 is required");
   }
   if (errorMessages.length > 0) {
-    errorEl.innerHTML = errorMessages.join(`<br>`);
+    numberErrorEl.innerHTML = errorMessages.join(`<br>`);
   } else {
     const amount = selectNumberEl.value;
     const category = selectCategoryEl.value;
@@ -109,8 +112,11 @@ function selectOption() {
       option.classList.add("selected");
 
       //get value of the answer option selected
-      let selectedOption = optionsEl.querySelector(".selected").textContent;
+      selectedOption = optionsEl.querySelector(".selected").textContent;
 
+      if (selectedOption) {
+        optionErrorEl.innerHTML = "";
+      }
       //indicate right or wrong answer
       if (selectedOption === correctAnswer) {
         option.classList.add("correct");
@@ -133,14 +139,25 @@ function selectOption() {
 }
 
 function handleNextButton() {
-  if (questionCount < +totalQuestionsEl.textContent) {
-    questionCount++;
-    setTimeout(() => {
-      displayQuestion(quizQuestions[questionCount - 1]);
-    }, 500);
+  let errorMessages = [];
+  if (!selectedOption) {
+    errorMessages.push("Please select an option!");
+    console.log("Please select an option!");
+  }
+  if (errorMessages.length > 0) {
+    optionErrorEl.innerHTML = errorMessages.join(`<br>`);
   } else {
-    nextButtonEl.classList.add("hide");
-    submitButtonEl.classList.add("show");
+    optionErrorEl.innerHTML = "";
+    selectedOption = "";
+    if (questionCount < +totalQuestionsEl.textContent) {
+      questionCount++;
+      setTimeout(() => {
+        displayQuestion(quizQuestions[questionCount - 1]);
+      }, 500);
+    } else {
+      nextButtonEl.classList.add("hide");
+      submitButtonEl.classList.add("show");
+    }
   }
 }
 
