@@ -17,15 +17,6 @@ body {
   color: rgb(30 27 75);
   font-weight: 500;
 }
-.header-container {
-  font-size: xx-large;
-  font-weight: 500;
-  color: rgb(49 46 129);
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(49, 46, 129, 0.5);
-  padding-bottom: 3%;
-}
 .container {
   width: 550px;
   max-width: 80%;
@@ -34,7 +25,53 @@ body {
   padding: 5%;
   box-shadow: 0 0 8px 1px;
 }
+.header-container {
+  font-size: xx-large;
+  font-weight: 500;
+  color: rgb(49 46 129);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(49, 46, 129, 0.5);
+  padding-bottom: 3%;
+  margin-bottom: 5%;
+}
 
+label {
+  display: block;
+  font-size: larger;
+  text-transform: capitalize;
+  margin-bottom: 3%;
+}
+
+input {
+  width: 100%;
+  padding: 3%;
+  margin-bottom: 5%;
+  border-radius: 10px;
+  background-color: rgb(238 242 255);
+  font-size: large;
+  border: 1px solid rgb(49 46 129);
+}
+select {
+  width: 100%;
+  padding: 3%;
+  text-transform: capitalize;
+  margin-bottom: 5%;
+  border-radius: 10px;
+  background-color: rgb(238 242 255);
+  font-size: large;
+  border: 1px solid rgb(49 46 129);
+}
+.start-btn {
+  width: 100%;
+  background-color: rgb(129 140 248);
+  color: #fff;
+  border: 1px solid rgb(129 140 248);
+  font-size: x-large;
+  padding: 3%;
+  border-radius: 10px;
+  margin-top: 5%;
+}
 .quiz-details {
   font-size: small;
   margin: 6% 0px;
@@ -130,19 +167,12 @@ body {
   margin: 12% 0px;
 }
 
-.play-again-btn {
-  width: 100%;
-  background-color: rgb(129 140 248);
-  color: #fff;
-  border: 1px solid rgb(129 140 248);
-  font-size: x-large;
-  padding: 3%;
-  border-radius: 10px;
-}
-
 @media only screen and (max-width: 519px) {
   .header-container {
     font-size: x-large;
+  }
+  .header {
+    font-size: xx-large;
   }
   .container {
     padding: 6%;

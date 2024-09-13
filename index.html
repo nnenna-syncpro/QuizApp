@@ -9,7 +9,58 @@
   </head>
   <body>
     <div class="container">
-      <div class="quiz-container">
+      <div class="start-game-container">
+        <div class="header-container">
+          <span class="header">Quizzller Game</span>
+        </div>
+        <div class="quiz-settings">
+          <label for="number-of-questions" class="">number of questions:</label>
+          <input
+            type="text"
+            required
+            spellcheck="false"
+            class="number-of-questions"
+            placeholder="Type a number less than 50"
+          />
+          <label for="select-category">select category:</label>
+          <select name="" id="" class="select-category">
+            <option value="">Any Category</option>
+            <option value="9">General Knowledge</option>
+            <option value="10">Books</option>
+            <option value="11">Film</option>
+            <option value="12">Music</option>
+            <option value="13">Musicals & Theatres</option>
+            <option value="14">Television</option>
+            <option value="15">Video Games</option>
+            <option value="16">Board Games</option>
+            <option value="17">Science & Nature</option>
+            <option value="18">Science: Computers</option>
+            <option value="19">Science: Mathematics</option>
+            <option value="20">Mythology</option>
+            <option value="21">Sports</option>
+            <option value="22">Geography</option>
+            <option value="23">History</option>
+            <option value="24">Politics</option>
+            <option value="25">Art</option>
+            <option value="26">Celebrities</option>
+            <option value="27">Animals</option>
+            <option value="28">Vehicles</option>
+            <option value="29">Comics</option>
+            <option value="30">Science: Gadgets</option>
+            <option value="31">Japanese Anime & Manga</option>
+            <option value="32">Cartoon & Animations</option>
+          </select>
+          <label for="difficulty-level">select difficulty:</label>
+          <select name="" id="" class="difficulty-level">
+            <option value="">Any Diffulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <button class="start-btn start-quiz-btn">Start Quiz</button>
+        </div>
+      </div>
+      <div class="quiz-container hide">
         <div class="header-container">
           <span class="header">Quizzller Game</span>
           <span class="score">0</span>
@@ -41,7 +92,7 @@
           <span class="header">Congratulations!</span>
         </div>
         <p class="display-score">You scored 3 out of 3</p>
-        <button class="btn play-again-btn">Play Again</button>
+        <button class="start-btn play-again-btn">Play Again</button>
       </div>
     </div>
   </body>
