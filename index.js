@@ -37,6 +37,18 @@ const optionErrorEl = document.querySelector(".error-option");
 
 const previousButtonEl = document.querySelector(".prev-btn");
 
+const spinLoaderEl = document.querySelector(".spin-loader");
+
+document.addEventListener("DOMContentLoaded", () => {
+  spinLoaderEl.classList.add("hide");
+  startGameEl.classList.remove("hide");
+});
+
+// window.addEventListener("load", () => {
+//   spinLoaderEl.classList.add("hide");
+//   startGameEl.classList.remove("hide");
+// });
+
 const startQuiz = () => {
   let errorMessages = [];
   if (
@@ -58,7 +70,7 @@ const startQuiz = () => {
       `${API_URL}?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`
     );
     startGameEl.classList.add("hide");
-    quizContainerEl.classList.remove("hide");
+    spinLoaderEl.classList.remove("hide");
   }
 };
 
@@ -72,6 +84,8 @@ const getQuestions = async (triviaUrl) => {
     console.log(state.quizQuestions);
     displayQuestion(state.quizQuestions[0]);
     state.questionCount = 1;
+    spinLoaderEl.classList.add("hide");
+    quizContainerEl.classList.remove("hide");
   } catch (error) {
     console.log("Error: " + error);
   }
