@@ -6,13 +6,18 @@ const totalQuestionsEl = document.querySelector(".total-questions");
 const questionNumberEl = document.querySelector(".question-number");
 const categoryEl = document.querySelector(".category");
 
-let quizQuestions = [];
+const state = {
+  quizQuestions: [],
+  questionCount: 0,
+  previousAnswers: [],
+  point: 0,
+  selectedOption: "",
+};
+
 let score = document.querySelector(".score");
-let point = 0;
 let correctAnswer = "";
 
 const nextButtonEl = document.querySelector(".next-btn");
-let questionCount = 0;
 
 const submitButtonEl = document.querySelector(".submit-btn");
 const endGameEl = document.querySelector(".end-game-container");
@@ -29,8 +34,6 @@ const selectDifficultyEl = document.querySelector(".difficulty-level");
 
 const numberErrorEl = document.querySelector(".error-number");
 const optionErrorEl = document.querySelector(".error-option");
-
-let selectedOption;
 
 const previousButtonEl = document.querySelector(".prev-btn");
 
@@ -65,22 +68,22 @@ const getQuestions = async (triviaUrl) => {
   try {
     const response = await fetch(triviaUrl);
     const data = await response.json();
-    quizQuestions = data.results;
-    console.log(quizQuestions);
-    displayQuestion(quizQuestions[0]);
-    questionCount = 1;
+    state.quizQuestions = data.results;
+    console.log(state.quizQuestions);
+    displayQuestion(state.quizQuestions[0]);
+    state.questionCount = 1;
   } catch (error) {
     console.log("Error: " + error);
   }
 };
 
 async function displayQuestion(question) {
-  totalQuestionsEl.innerHTML = `${quizQuestions.length}`;
+  totalQuestionsEl.innerHTML = `${state.quizQuestions.length}`;
 
   //display question
   questionEl.innerHTML = question.question;
   //display question number
-  questionNumberEl.innerHTML = `${quizQuestions.indexOf(question) + 1}/`;
+  questionNumberEl.innerHTML = `${state.quizQuestions.indexOf(question) + 1}/`;
   //display question category
   categoryEl.innerHTML = question.category;
 
@@ -114,16 +117,16 @@ function selectOption() {
       option.classList.add("selected");
 
       //get value of the answer option selected
-      selectedOption = optionsEl.querySelector(".selected").textContent;
+      state.selectedOption = optionsEl.querySelector(".selected").textContent;
 
-      if (selectedOption) {
+      if (state.selectedOption) {
         optionErrorEl.innerHTML = "";
       }
       //indicate right or wrong answer
-      if (selectedOption === decodeHTML(correctAnswer)) {
+      if (state.selectedOption === decodeHTML(correctAnswer)) {
         option.classList.add("correct");
-        point++;
-        score.innerHTML = point;
+        state.point++;
+        score.innerHTML = state.point;
       } else {
         option.classList.add("wrong");
       }
@@ -147,7 +150,7 @@ function decodeHTML(text) {
 
 function handleNextButton() {
   let errorMessages = [];
-  if (!selectedOption) {
+  if (!state.selectedOption) {
     errorMessages.push("Please select an option!");
     console.log("Please select an option!");
   }
@@ -155,17 +158,18 @@ function handleNextButton() {
     optionErrorEl.innerHTML = errorMessages.join(`<br>`);
   } else {
     optionErrorEl.innerHTML = "";
-    selectedOption = "";
-    if (questionCount < +totalQuestionsEl.textContent) {
-      questionCount++;
+    state.selectedOption = "";
+    if (state.questionCount < +totalQuestionsEl.textContent) {
+      state.questionCount++;
+      console.log(state.questionCount);
       setTimeout(() => {
-        displayQuestion(quizQuestions[questionCount - 1]);
+        displayQuestion(state.quizQuestions[state.questionCount - 1]);
       }, 500);
     } else {
       nextButtonEl.classList.add("hide");
       submitButtonEl.classList.add("show");
     }
-    if (questionCount > 1) {
+    if (state.questionCount > 1) {
       previousButtonEl.classList.add("show");
       previousButtonEl.classList.remove("hide");
     }
