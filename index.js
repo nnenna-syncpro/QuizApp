@@ -131,6 +131,9 @@ function selectOption() {
         option.classList.add("wrong");
       }
 
+      state.previousAnswers.push(state.selectedOption);
+      console.log(state.previousAnswers);
+
       //show right answer if wrong answer is selected
       Array.from(optionsEl.querySelectorAll("button")).forEach((button) => {
         if (button.textContent === decodeHTML(correctAnswer)) {
@@ -177,6 +180,26 @@ function handleNextButton() {
 }
 
 nextButtonEl.addEventListener("click", handleNextButton);
+
+function handlePreviousButton() {
+  if (
+    state.questionCount >= 1 ||
+    state.questionCount < +totalQuestionsEl.textContent
+  ) {
+    state.questionCount--;
+    console.log(state.questionCount);
+    setTimeout(() => {
+      displayQuestion(state.quizQuestions[state.questionCount - 1]);
+    }, 500);
+    console.log(state.previousAnswers[state.questionCount - 1]);
+  }
+
+  if (state.questionCount === 1) {
+    previousButtonEl.classList.remove("show");
+    previousButtonEl.classList.add("hide");
+  }
+}
+previousButtonEl.addEventListener("click", handlePreviousButton);
 
 function handleSubmitButton() {
   quizContainerEl.classList.add("hide");
