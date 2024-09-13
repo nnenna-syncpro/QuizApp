@@ -32,6 +32,8 @@ const optionErrorEl = document.querySelector(".error-option");
 
 let selectedOption;
 
+const previousButtonEl = document.querySelector(".prev-btn");
+
 const startQuiz = () => {
   let errorMessages = [];
   if (
@@ -118,7 +120,7 @@ function selectOption() {
         optionErrorEl.innerHTML = "";
       }
       //indicate right or wrong answer
-      if (selectedOption === correctAnswer) {
+      if (selectedOption === decodeHTML(correctAnswer)) {
         option.classList.add("correct");
         point++;
         score.innerHTML = point;
@@ -128,7 +130,7 @@ function selectOption() {
 
       //show right answer if wrong answer is selected
       Array.from(optionsEl.querySelectorAll("button")).forEach((button) => {
-        if (button.textContent === correctAnswer) {
+        if (button.textContent === decodeHTML(correctAnswer)) {
           button.classList.add("correct");
         }
         //disbale buttons to prevent selecting more than one option
@@ -136,6 +138,11 @@ function selectOption() {
       });
     });
   });
+}
+
+function decodeHTML(text) {
+  let parsed = new DOMParser().parseFromString(text, "text/html");
+  return parsed.documentElement.textContent;
 }
 
 function handleNextButton() {
@@ -157,6 +164,10 @@ function handleNextButton() {
     } else {
       nextButtonEl.classList.add("hide");
       submitButtonEl.classList.add("show");
+    }
+    if (questionCount > 1) {
+      previousButtonEl.classList.add("show");
+      previousButtonEl.classList.remove("hide");
     }
   }
 }
