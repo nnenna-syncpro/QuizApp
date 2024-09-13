@@ -1,4 +1,4 @@
-const API_URL = `https://opentdb.com/api.php?amount=2&category=18&difficulty=easy&type=multiple`;
+const API_URL = `https://opentdb.com/api.php`;
 
 const questionEl = document.querySelector(".question");
 const optionsEl = document.querySelector(".options-container");
@@ -21,6 +21,25 @@ const quizContainerEl = document.querySelector(".quiz-container");
 
 const playAgainButtonEl = document.querySelector(".play-again-btn");
 
+const startQuizButtonEl = document.querySelector(".start-quiz-btn");
+const startGameEl = document.querySelector(".start-game-container");
+const selectNumberEl = document.querySelector(".number-of-questions");
+const selectCategoryEl = document.querySelector(".select-category");
+const selectDifficultyEl = document.querySelector(".difficulty-level");
+
+const startQuiz = () => {
+  const amount = selectNumberEl.value;
+  const category = selectCategoryEl.value;
+  const difficulty = selectDifficultyEl.value;
+  getQuestions(
+    `${API_URL}?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`
+  );
+  startGameEl.classList.add("hide");
+  quizContainerEl.classList.remove("hide");
+};
+
+startQuizButtonEl.addEventListener("click", startQuiz);
+
 const getQuestions = async (triviaUrl) => {
   try {
     const response = await fetch(triviaUrl);
@@ -33,10 +52,6 @@ const getQuestions = async (triviaUrl) => {
     console.log("Error: " + error);
   }
 };
-
-document.addEventListener("DOMContentLoaded", () => {
-  getQuestions(API_URL);
-});
 
 async function displayQuestion(question) {
   totalQuestionsEl.innerHTML = `${quizQuestions.length}`;
