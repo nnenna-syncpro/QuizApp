@@ -19,6 +19,8 @@ const endGameEl = document.querySelector(".end-game-container");
 const displayScoreEl = document.querySelector(".display-score");
 const quizContainerEl = document.querySelector(".quiz-container");
 
+const playAgainButtonEl = document.querySelector(".play-again-btn");
+
 const getQuestions = async (triviaUrl) => {
   try {
     const response = await fetch(triviaUrl);
@@ -122,3 +124,18 @@ function handleSubmitButton() {
 }
 
 submitButtonEl.addEventListener("click", handleSubmitButton);
+
+function handlePlayAgainButton() {
+  getQuestions(API_URL);
+  quizContainerEl.classList.remove("hide");
+  endGameEl.classList.add("hide");
+  score.innerHTML = "0";
+  point = 0;
+  questionCount = 0;
+  nextButtonEl.classList.add("show");
+  nextButtonEl.classList.remove("hide");
+  submitButtonEl.classList.remove("show");
+  submitButtonEl.classList.add("hide");
+}
+
+playAgainButtonEl.addEventListener("click", handlePlayAgainButton);
