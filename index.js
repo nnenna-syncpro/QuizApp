@@ -27,15 +27,31 @@ const selectNumberEl = document.querySelector(".number-of-questions");
 const selectCategoryEl = document.querySelector(".select-category");
 const selectDifficultyEl = document.querySelector(".difficulty-level");
 
+const errorEl = document.querySelector(".error");
+
 const startQuiz = () => {
-  const amount = selectNumberEl.value;
-  const category = selectCategoryEl.value;
-  const difficulty = selectDifficultyEl.value;
-  getQuestions(
-    `${API_URL}?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`
-  );
-  startGameEl.classList.add("hide");
-  quizContainerEl.classList.remove("hide");
+  let errorMessages = [];
+  if (
+    selectNumberEl.value === "" ||
+    selectNumberEl.value === null ||
+    selectNumberEl.value <= 0 ||
+    selectNumberEl.value > 50
+  ) {
+    errorMessages.push("A number between 1 and 50 is required!");
+    console.log("A number between 1 and 50 is required");
+  }
+  if (errorMessages.length > 0) {
+    errorEl.innerHTML = errorMessages.join(`<br>`);
+  } else {
+    const amount = selectNumberEl.value;
+    const category = selectCategoryEl.value;
+    const difficulty = selectDifficultyEl.value;
+    getQuestions(
+      `${API_URL}?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`
+    );
+    startGameEl.classList.add("hide");
+    quizContainerEl.classList.remove("hide");
+  }
 };
 
 startQuizButtonEl.addEventListener("click", startQuiz);

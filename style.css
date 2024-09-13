@@ -52,6 +52,13 @@ input {
   font-size: large;
   border: 1px solid rgb(49 46 129);
 }
+
+.error {
+  color: rgb(239 68 68);
+  font-size: medium;
+  margin-top: -2%;
+  margin-bottom: 3%;
+}
 select {
   width: 100%;
   padding: 3%;

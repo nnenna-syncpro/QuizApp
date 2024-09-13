@@ -22,6 +22,7 @@
             class="number-of-questions"
             placeholder="Type a number less than 50"
           />
+          <div class="error"></div>
           <label for="select-category">select category:</label>
           <select name="" id="" class="select-category">
             <option value="">Any Category</option>
@@ -57,7 +58,9 @@
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
-          <button class="start-btn start-quiz-btn">Start Quiz</button>
+          <button type="submit" class="start-btn start-quiz-btn">
+            Start Quiz
+          </button>
         </div>
       </div>
       <div class="quiz-container hide">
